@@ -1,0 +1,10 @@
+{% extends 'core/base.html' %}
+
+{% block principal %}
+<div class="container mt-5">
+    <h2>Acceso Denegado</h2>
+    <div class="alert alert-warning" role="alert">
+        Debes iniciar sesión para acceder a esta página. Por favor, <a href="{% url 'login' %}">inicia sesión</a>.
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block principal %}
+    <section class="banner">
+        <div id="carouselExampleCaptions" class="carousel slide">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item c-item active">
+                <img src="https://assets.jumpseller.com/store/casita-de-lana/themes/294268/options/23759520/banner4.jpg?1596037319" class="d-block w-100 c-img" alt="...">
+                <div class="carousel-caption top-0 mt-4">
+                  <p class="fs-3 mt-5">¿Quieres un pedido personalizado?</p>
+                  <h5 class="display-1 fw-bolder">Confía en Tejidos Tayet</h5>
+                  <button class="btn btn-primary px-4 py-2 mt-5">Hacer Pedido</button>
+                </div>
+              </div>
+              <div class="carousel-item c-item">
+                <img src="https://img.freepik.com/fotos-premium/fondo-tejido-lana-natural-bola-hilo-vintage-hilo-tejer-ropa-invierno-hecha-mano_254717-959.jpg" class="d-block w-100 c-img" alt="...">
+                <div class="carousel-caption top-0 mt-4">
+                    <p class="fs-3 mt-5">¿Estás comenzando en el arte de tejer?</p>
+                    <h5 class="display-1 fw-bolder">Tejidos Tayet te ofrece una variedad de patrones.</h5>
+                  </div>
+              </div>
+              <div class="carousel-item c-item">
+                <img src="https://www.entrelanas.com/cdn/shop/articles/cuanto_cobrar_720x.JPG?v=1594398304" class="d-block w-100 c-img" alt="...">
+                <div class="carousel-caption top-0 mt-4">
+                    <p class="fs-3 mt-5">¿Te interesa algún otro tipo de confección?</p>
+                    <h5 class="display-1 fw-bolder">Contáctate con Tejidos Tayet y lo revisamos contigo</h5>
+                  </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+    </section>
+
+    <section class="text-center my-5">
+        <blockquote class="blockquote">
+            <p class="mb-0 fs-3">“Ignoro de qué sustancia extraordinaria está confeccionada la identidad, pero es un tejido discontinuo que zurcimos a fuerza de voluntad y de memoria.” </p>
+            <p class="mb-0 fs-4">—  Rosa Montero</p>
+        </blockquote>
+    </section>
+
+    <section class="overview">
+        <div class="container h-100 d-flex align-items-center">
+            <div class="row w-100 text-center fs-4">
+                <div class="col-xl">
+                    <i class="fa-regular fa-credit-card me-2"></i>
+                    Cotiza con nosotros
+                </div>
+                <div class="col-xl">
+                    <i class="fa-solid fa-location-dot"></i>
+                    Envios por starken
+                </div>
+                <div class="col-xl">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    Asesorías en línea
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="categorias" class="pt-1">
+        <h2 class="text-center my-5">Categorías</h2>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <img src="{% static 'core/img/mostaza.jpeg' %}" class="card-img-top" alt="Gorro de lana" style="object-fit: cover; height: 200px;">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Gorros de lana</h5>
+                            <p class="card-text">Gorros a crochet hechos a mano.</p>
+                            <a href="{% url 'productos' %}?categoria=1" class="btn btn-primary mt-auto">Ir</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://cdnx.jumpseller.com/el-bazar-de-ella/image/33966823/resize/610/610?1688961098" class="card-img-top" alt="Chaleco de lana" style="object-fit: cover; height: 200px;">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Chaleco de lana</h5>
+                            <p class="card-text">Chalecos con diseños variados y para toda la familia</p>
+                            <a href="{% url 'productos' %}?categoria=2" class="btn btn-primary mt-auto">Ir</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://i.pinimg.com/originals/a1/4b/f7/a14bf7bf4402e9ee44c3036efe13cf33.jpg" class="card-img-top" alt="Guantes de lana" style="object-fit: cover; height: 200px;">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Guantes de lana</h5>
+                            <p class="card-text">Guantes versátiles y cómodos.</p>
+                            <a href="{% url 'productos' %}?categoria=3" class="btn btn-primary mt-auto">Ir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="pt-5"></div>
+{% endblock %}

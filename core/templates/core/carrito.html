@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+
+{% block principal %}
+<div class="container mt-5">
+    <h2>Tu carrito</h2>
+    <div class="row">
+        {% for item in carrito_items %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{ item.producto.imagen.url }}" class="card-img-top" alt="{{ item.producto.nombre }}" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.producto.nombre }}</h5>
+                    <p class="card-text">Precio: ${{ item.producto.precio }}</p>
+                    <p class="card-text">Cantidad: 
+                        <div class="d-flex align-items-center">
+                            <a href="{% url 'decrementar_cantidad' item.id %}" class="btn btn-secondary btn-sm">-</a>
+                            <span class="mx-2">{{ item.cantidad }}</span>
+                            <a href="{% url 'incrementar_cantidad' item.id %}" class="btn btn-secondary btn-sm">+</a>
+                        </div>
+                    </p>
+                    <p class="card-text">Total: ${{ item.get_total_precio }}</p>
+                    <a href="{% url 'eliminar_del_carrito' item.id %}" class="btn btn-danger">Eliminar</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info" role="alert">
+                Tu carrito está vacío.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% if carrito_items %}
+    <div class="mt-3">
+        <h4>Total del carrito: ${{ total_precio }}</h4>
+    </div>
+    <a href="{% url 'pago' %}" class="btn btn-success mt-3">Finalizar compra</a>
+    {% endif %}
+</div>
+<div class="pt-5"></div>
+{% endblock %}
