@@ -1,0 +1,16 @@
+<!-- core/templates/core/exito_pago.html -->
+{% extends 'core/base.html' %}
+{% block principal %}
+<div class="container mt-5">
+    <h2>Pago exitoso</h2>
+    <p>¡Tu pago ha sido procesado exitosamente!</p>
+    <p>Detalles de la transacción:</p>
+    <ul>
+        <li>Orden de compra: {{ response.buy_order }}</li>
+        <li>Monto: ${{ response.amount }}</li>
+        <li>Fecha de transacción: {{ response.transaction_date }}</li>
+        <li>Estado: {{ response.status }}</li>
+    </ul>
+    <a href="{% url 'index' %}" class="btn btn-primary">Volver al inicio</a>
+</div>
+{% endblock %}

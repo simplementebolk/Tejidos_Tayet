@@ -1,10 +1,12 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from .models import *
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from .forms import UserRegistrationForm
 from django.contrib.auth.decorators import login_required
+from .webpay_config import tx
+import time
 
 # Create your views here.
 
@@ -144,3 +146,36 @@ def decrementar_cantidad(request, item_id):
 @login_required
 def pago(request):
     return render(request, 'core/pago.html')
+
+#PAGO
+
+@login_required
+def iniciar_pago(request):
+    carrito_items = Carrito.objects.filter(usuario=request.user)
+    if not carrito_items.exists():
+        return redirect('carrito_detalle')
+
+    total_precio = sum(item.get_total_precio() for item in carrito_items)
+    buy_order = f'{request.user.id}-{int(time.time())}'
+    session_id = request.session.session_key
+    return_url = request.build_absolute_uri(reverse('confirmar_pago'))
+
+    try:
+        response = tx.create(buy_order, session_id, total_precio, return_url)
+        request.session['token'] = response['token']
+        return redirect(response['url'] + '?token_ws=' + response['token'])
+    except WebpayException as e:
+        return render(request, 'core/error_pago.html', {'error': str(e)})
+
+@login_required
+def confirmar_pago(request):
+    token = request.GET.get('token_ws')
+    try:
+        response = tx.commit(token)
+        if response['status'] == 'FAILED':
+            error_message = response.get('detail', 'Error desconocido')
+            return render(request, 'core/error_pago.html', {'error': error_message})
+        Carrito.objects.filter(usuario=request.user).delete()
+        return render(request, 'core/exito_pago.html', {'response': response})
+    except WebpayException as e:
+        return render(request, 'core/error_pago.html', {'error': str(e)})

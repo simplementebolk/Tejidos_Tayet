@@ -1,4 +1,4 @@
-#!/home/bolk/Code/WebProjects/Tienda/venv/bin/python3
+#!/home/bolk/SERIUSPROJECTS/Tienda/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
