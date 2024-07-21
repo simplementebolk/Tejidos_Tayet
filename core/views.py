@@ -188,5 +188,5 @@ def confirmar_pago(request):
 
         carrito_items.delete()
         return render(request, 'core/exito_pago.html', {'response': response})
-    except WebpayException as e:
-        return render(request, 'core/error_pago.html', {'error': str(e)})
+    except:
+        return render(request, 'core/error_pago.html',)
