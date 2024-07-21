@@ -110,6 +110,11 @@ def eliminar_del_carrito(request, item_id):
     return redirect("carrito_detalle")
 
 @login_required
+def vaciar_carrito(request):
+    Carrito.objects.filter(usuario=request.user).delete()
+    return render(request, "core/carrito.html")
+
+@login_required
 def carrito_detalle(request):
     carrito_items = Carrito.objects.filter(usuario=request.user)
     total_precio = sum(item.get_total_precio() for item in carrito_items)
@@ -175,7 +180,13 @@ def confirmar_pago(request):
         if response['status'] == 'FAILED':
             error_message = response.get('detail', 'Error desconocido')
             return render(request, 'core/error_pago.html', {'error': error_message})
-        Carrito.objects.filter(usuario=request.user).delete()
+        carrito_items = Carrito.objects.filter(usuario=request.user)
+        for item in carrito_items:
+            producto = item.producto
+            producto.stock -= item.cantidad
+            producto.save()
+
+        carrito_items.delete()
         return render(request, 'core/exito_pago.html', {'response': response})
     except WebpayException as e:
         return render(request, 'core/error_pago.html', {'error': str(e)})

@@ -13,8 +13,9 @@ urlpatterns = [
     path('agregar-al-carrito/<int:producto_id>/', agregar_al_carrito, name='agregar_al_carrito'),
     path('eliminar-del-carrito/<int:item_id>/', eliminar_del_carrito, name='eliminar_del_carrito'),
     path('carrito/', carrito_detalle, name='carrito_detalle'),
+    path('vaciar_carrito/', vaciar_carrito, name='vaciar_carrito'),
     path('decrementar-cantidad/<int:item_id>/', decrementar_cantidad, name='decrementar_cantidad'),
     path('incrementar-cantidad/<int:item_id>/', incrementar_cantidad, name='incrementar_cantidad'),
     path('pago/', iniciar_pago, name='pago'),
-    path('confirmar_pago/', confirmar_pago, name='confirmar_pago'),  
+    path('confirmar_pago/', confirmar_pago, name='confirmar_pago'),
 ]

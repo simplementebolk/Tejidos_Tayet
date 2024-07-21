@@ -35,9 +35,14 @@
                             <a href="{% url 'producto_detalle' producto.id %}" class="btn btn-primary flex-grow-1">
                                 Ir
                             </a>
+                            {% if producto.stock > 0%}
                             <a href="{% url 'agregar_al_carrito' producto.id %}" class="btn btn-success flex-grow-1">
                                 Agregar al carrito
                             </a>
+                            {% else %}
+                                <p class="text-danger">Producto sin stock</p>
+                            {% endif %}
+
                         </div>
                     </div>
                 </div>

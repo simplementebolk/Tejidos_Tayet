@@ -36,6 +36,7 @@
         <h4>Total del carrito: ${{ total_precio }}</h4>
     </div>
     <a href="{% url 'pago' %}" class="btn btn-success mt-3">Finalizar compra</a>
+    <a href="{% url 'vaciar_carrito' %}" class="btn btn-danger mt-3">Vaciar carrito</a>
     {% endif %}
 </div>
 <div class="pt-5"></div>

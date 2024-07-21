@@ -19,17 +19,21 @@
                             <p class="card-text mb-3"><strong>Descripción:</strong> {{ producto.descripcion }}</p>
                             <p class="card-text mb-3"><strong>Precio:</strong> ${{ producto.precio }}</p>
                             <p class="card-text mb-4"><strong>Stock:</strong> {{ producto.stock }}</p>
+                
+                            {% if producto.stock > 0 %}
                             <div class="d-flex gap-2">
                                 <a href="{% url 'agregar_al_carrito' producto.id %}" class="btn btn-success">
                                     <i class="fas fa-cart-plus"></i> Agregar al carrito 
                                 </a>
-                                <a href="{% url 'pago' %}" class="btn btn-primary">
-                                    <i class="fas fa-shopping-cart"></i> Comprar ahora ${{ producto.precio }}
-                                </a>
                             </div>
+                            {% else %}
+                            <p class="text-danger">Producto sin stock</p>
+                            {% endif %}
+                
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </section>

@@ -23,49 +23,44 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-ligth" style="background-color: #dfc7d2;">
-            <div class="container d-flex align-items-center">
+        <nav class="navbar navbar-expand-md navbar-light" style="background-color: #dfc7d2;">
+            <div class="container">
                 <a class="navbar-brand d-flex align-items-center fs-2" href="{% url 'index' %}">
                     <span>TAYET</span>
                     <img src="{% static 'core/img/icono.png' %}" alt="Logo" style="height: 40px;">
                 </a>
     
-                <button class="navbar-toggler d-sm-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
     
-                <div class="collapse navbar-collapse d-sm-flex justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav me-3 d-flex align-items-center">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'index' %}">
-                                <i class="fas fa-home"></i>
+                                <i class="fas fa-home"></i> Inicio
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'productos' %}">
-                                <i class="fas fa-box"></i>
+                                <i class="fas fa-box"></i> Productos
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'contacto' %}">
-                                <i class="fas fa-envelope"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-user"></i>
+                                <i class="fas fa-envelope"></i> Contacto
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#searchModal">
-                                <i class="fas fa-search"></i>
+                                <i class="fas fa-search"></i> Buscar
                             </a>
                         </li>
 
                         {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link position-relative" href="{% url 'carrito_detalle' %}">
-                                <i class="fas fa-shopping-cart"></i>
+                                <i class="fas fa-shopping-cart"></i> Carrito
                                 {% if cantidad_total > 0 %}
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                     {{ cantidad_total }}
@@ -74,19 +69,26 @@
                                 {% endif %}
                             </a>
                         </li>
-                        {% else %}
                         {% endif %}
 
                         {% if user.is_authenticated %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'logout' %}">
-                                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesion
+                                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
                                 </a>
                             </li>
                         {% else %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'login' %}">
-                                    <i class="fas fa-sign-in-alt"></i> Iniciar Sesion
+                                    <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        {% if user.is_authenticated and user.is_superuser %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="fas fa-cogs"></i> Admin
                                 </a>
                             </li>
                         {% endif %}
@@ -123,7 +125,7 @@
     <footer style="background-color: #dfc7d2; color: #333333; text-align: center; padding: 20px 0; margin-top: auto;">
         <div class="container">
             <p style="margin-bottom: 10px;">&copy; 2024 Tejidostayet.com</p>
-                <p style="margin-bottom: 0;">
+            <p style="margin-bottom: 0;">
                 <a href="{% url 'index' %}" style="color: #333333; text-decoration: none; margin: 0 10px;">Inicio</a>
                 <a href="#" style="color: #333333; text-decoration: none; margin: 0 10px;">Acerca de</a>
                 <a href="{% url 'productos' %}" style="color: #333333; text-decoration: none; margin: 0 10px;">Productos</a>
