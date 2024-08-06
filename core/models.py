@@ -25,9 +25,13 @@ class Carrito(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField(default=1)
+    envio = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.cantidad} x {self.producto.nombre}"
 
     def get_total_precio(self):
-        return self.cantidad * self.producto.precio
+        total = self.cantidad * self.producto.precio
+        if self.envio:
+            total += 5000
+        return total

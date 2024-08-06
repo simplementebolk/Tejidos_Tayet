@@ -7,6 +7,7 @@ from .forms import UserRegistrationForm
 from django.contrib.auth.decorators import login_required
 from .webpay_config import tx
 import time
+from transbank.error.transbank_error import TransbankError
 
 # Create your views here.
 
@@ -117,6 +118,13 @@ def vaciar_carrito(request):
 @login_required
 def carrito_detalle(request):
     carrito_items = Carrito.objects.filter(usuario=request.user)
+
+    if request.method == 'POST':
+        enviar = 'envio' in request.POST
+        for item in carrito_items:
+            item.envio = enviar
+            item.save()
+
     total_precio = sum(item.get_total_precio() for item in carrito_items)
 
     context = {
@@ -148,10 +156,6 @@ def decrementar_cantidad(request, item_id):
         messages.success(request, "Cantidad decrementada.")
     return redirect('carrito_detalle')
 
-@login_required
-def pago(request):
-    return render(request, 'core/pago.html')
-
 #PAGO
 
 @login_required
@@ -180,6 +184,7 @@ def confirmar_pago(request):
         if response['status'] == 'FAILED':
             error_message = response.get('detail', 'Error desconocido')
             return render(request, 'core/error_pago.html', {'error': error_message})
+
         carrito_items = Carrito.objects.filter(usuario=request.user)
         for item in carrito_items:
             producto = item.producto
@@ -188,5 +193,8 @@ def confirmar_pago(request):
 
         carrito_items.delete()
         return render(request, 'core/exito_pago.html', {'response': response})
-    except:
-        return render(request, 'core/error_pago.html',)
+    except TransbankError as e:
+        return render(request, 'core/error_pago.html', {'error': str(e)})
+    except Exception as e:
+        return render(request, 'core/error_pago.html', {'error': str(e)})
+

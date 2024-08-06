@@ -1,16 +1,55 @@
-<!-- core/templates/core/exito_pago.html -->
 {% extends 'core/base.html' %}
+{% load static %}
 {% block principal %}
 <div class="container mt-5">
-    <h2>Pago exitoso</h2>
-    <p>¡Tu pago ha sido procesado exitosamente!</p>
-    <p>Detalles de la transacción:</p>
-    <ul>
-        <li>Orden de compra: {{ response.buy_order }}</li>
-        <li>Monto: ${{ response.amount }}</li>
-        <li>Fecha de transacción: {{ response.transaction_date }}</li>
-        <li>Estado: {{ response.status }}</li>
-    </ul>
-    <a href="{% url 'index' %}" class="btn btn-primary">Volver al inicio</a>
+    <div class="card">
+        <div class="card-header bg-success text-white">
+            <h2>Pago exitoso</h2>
+        </div>
+        <div class="card-body">
+            <p class="lead">¡Tu pago ha sido procesado exitosamente!</p>
+            <hr>
+            <h4>Detalles de la transacción:</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Orden de compra:</strong> {{ response.buy_order }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Monto:</strong> ${{ response.amount }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Fecha de transacción:</strong> <span id="transaction-date">{{ response.transaction_date }}</span></p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Estado:</strong> <span class="badge badge-success text-dark">{{ response.status }}</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <a href="{% url 'index' %}" class="btn btn-primary">Volver al inicio</a>
+        </div>
+    </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const dateElement = document.getElementById("transaction-date");
+        const dateString = dateElement.innerText;
+        const date = new Date(dateString);
+
+        const options = { 
+            year: 'numeric', 
+            month: '2-digit', 
+            day: '2-digit', 
+            hour: '2-digit', 
+            minute: '2-digit', 
+            second: '2-digit', 
+            hour12: false 
+        };
+        const formattedDate = date.toLocaleDateString('es-ES', options);
+        dateElement.innerText = formattedDate.replace(',', '');
+    });
+</script>
 {% endblock %}
