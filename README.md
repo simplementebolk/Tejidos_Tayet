@@ -43,7 +43,7 @@ Sigue estos pasos para ejecutar el proyecto en tu entorno local:
 
 ### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/simplementebolk/tienda.git
+git clone https://github.com/simplementebolk/Tejidos_Tayet.git
 cd tienda
 ```
 
