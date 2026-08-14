@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-&9l=r6ug!u--49$5vg!w5_j*x4#x507%z%i(sx!(u3g4+a6$ic
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','tejidos-tayet.vercel.app','.vercel.app']
 
 
 #ALMACENAR SESION
