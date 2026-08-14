@@ -8,6 +8,8 @@
 
 Plataforma web e-commerce diseñada para la venta de productos artesanales y tejidos hechos a mano, integrando gestión de pedidos personalizados y pasarela de pagos en línea.
 
+https://tejidos-tayet-qbzqqr99m-simplementebolks-projects.vercel.app/
+
 <img width="1904" height="914" alt="image" src="https://github.com/user-attachments/assets/45751f10-c053-4349-85cb-22ae95ab2bef" />
 <img width="590" height="711" alt="image" src="https://github.com/user-attachments/assets/798b74f7-4c55-49f3-9936-016099ce70e1" />
 <img width="639" height="719" alt="image" src="https://github.com/user-attachments/assets/4dd37ca6-35b3-4e2e-bf93-92c0364cb0ed" />
